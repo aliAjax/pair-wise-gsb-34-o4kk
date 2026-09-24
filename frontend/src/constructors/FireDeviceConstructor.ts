@@ -8,7 +8,7 @@ export const createDefaultFireDevice = (overrides: Partial<FireDevice> = {}): Fi
   floor: "floor 1" as never,
   location_desc: "location desc 1" as never,
   install_date: "2026-06-11T09:00:00Z" as never,
-  status: "IN_PROGRESS" as never,
+  status: "ACTIVE" as never,
   next_maintenance_at: "2026-06-11T09:00:00Z" as never,
   ...overrides
 });

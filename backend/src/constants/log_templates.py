@@ -28,5 +28,12 @@ LOG_TEMPLATES = {
     "HazardTicket.update",
     "HazardTicket.status",
     "HazardTicket.export"
+  ],
+  "DeviceOutage": [
+    "DeviceOutage.apply",
+    "DeviceOutage.confirm",
+    "DeviceOutage.check",
+    "DeviceOutage.recover",
+    "DeviceOutage.cancel"
   ]
 }

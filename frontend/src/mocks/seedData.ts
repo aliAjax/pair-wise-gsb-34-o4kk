@@ -37,7 +37,7 @@ export const mockData = {
       "floor": "floor 1",
       "location_desc": "location desc 1",
       "install_date": "2026-06-11T09:00:00Z",
-      "status": "IN_PROGRESS",
+      "status": "ACTIVE",
       "next_maintenance_at": "2026-06-11T09:00:00Z"
     },
     {
@@ -48,7 +48,7 @@ export const mockData = {
       "floor": "floor 2",
       "location_desc": "location desc 2",
       "install_date": "2026-06-12T09:00:00Z",
-      "status": "SUBMITTED",
+      "status": "ACTIVE",
       "next_maintenance_at": "2026-06-12T09:00:00Z"
     },
     {
@@ -59,7 +59,7 @@ export const mockData = {
       "floor": "floor 3",
       "location_desc": "location desc 3",
       "install_date": "2026-06-13T09:00:00Z",
-      "status": "PLANNED",
+      "status": "ACTIVE",
       "next_maintenance_at": "2026-06-13T09:00:00Z"
     }
   ],
@@ -136,7 +136,7 @@ export const mockData = {
       "deadline": "deadline 1",
       "rectify_status": "IN_PROGRESS",
       "rectify_note": "rectify note 1",
-      "closed_at": "2026-06-11T09:00:00Z"
+      "closed_at": ""
     },
     {
       "id": 2,
@@ -144,7 +144,7 @@ export const mockData = {
       "severity": "severity 2",
       "owner_id": 2,
       "deadline": "deadline 2",
-      "rectify_status": "SUBMITTED",
+      "rectify_status": "CLOSED",
       "rectify_note": "rectify note 2",
       "closed_at": "2026-06-12T09:00:00Z"
     },
@@ -154,9 +154,93 @@ export const mockData = {
       "severity": "severity 3",
       "owner_id": 3,
       "deadline": "deadline 3",
-      "rectify_status": "PLANNED",
+      "rectify_status": "OPEN",
       "rectify_note": "rectify note 3",
-      "closed_at": "2026-06-13T09:00:00Z"
+      "closed_at": ""
+    }
+  ],
+  "deviceOutage": [
+    {
+      "id": 1,
+      "device_id": 1,
+      "reason": "报警阀组漏水，需更换密封件",
+      "expected_recovery_at": "2026-06-20T09:00:00Z",
+      "status": "RECOVERED",
+      "applicant": "inspector#1",
+      "applied_at": "2026-06-10T09:00:00Z",
+      "confirmer": "supervisor#2",
+      "confirmed_at": "2026-06-10T10:30:00Z",
+      "device_status_before": "ACTIVE",
+      "device_status_after": "ACTIVE",
+      "check_result": "NORMAL",
+      "check_note": "密封件已更换，试压正常",
+      "checker": "inspector#1",
+      "checked_at": "2026-06-18T15:00:00Z",
+      "recoverer": "supervisor#2",
+      "recovered_at": "2026-06-18T15:20:00Z",
+      "events": [
+        {
+          "action": "APPLY",
+          "handler": "inspector#1",
+          "at": "2026-06-10T09:00:00Z",
+          "from_status": "",
+          "to_status": "PENDING",
+          "note": "报警阀组漏水，需更换密封件"
+        },
+        {
+          "action": "CONFIRM",
+          "handler": "supervisor#2",
+          "at": "2026-06-10T10:30:00Z",
+          "from_status": "PENDING",
+          "to_status": "DEACTIVATED",
+          "note": "设备停用，1 项未开始任务退回排期"
+        },
+        {
+          "action": "CHECK",
+          "handler": "inspector#1",
+          "at": "2026-06-18T15:00:00Z",
+          "from_status": "DEACTIVATED",
+          "to_status": "DEACTIVATED",
+          "note": "复启检查：正常。密封件已更换，试压正常"
+        },
+        {
+          "action": "RECOVER",
+          "handler": "supervisor#2",
+          "at": "2026-06-18T15:20:00Z",
+          "from_status": "DEACTIVATED",
+          "to_status": "RECOVERED",
+          "note": "检查正常且关联隐患已闭环，设备复启"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "device_id": 2,
+      "reason": "烟感误报频繁，待厂家检测",
+      "expected_recovery_at": "2026-09-30T09:00:00Z",
+      "status": "PENDING",
+      "applicant": "inspector#3",
+      "applied_at": "2026-09-23T08:30:00Z",
+      "confirmer": "",
+      "confirmed_at": "",
+      "device_status_before": "ACTIVE",
+      "device_status_after": "",
+      "check_result": "",
+      "check_note": "",
+      "checker": "",
+      "checked_at": "",
+      "recoverer": "",
+      "recovered_at": "",
+      "events": [
+        {
+          "action": "APPLY",
+          "handler": "inspector#3",
+          "at": "2026-09-23T08:30:00Z",
+          "from_status": "",
+          "to_status": "PENDING",
+          "note": "烟感误报频繁，待厂家检测"
+        }
+      ]
     }
   ]
 } as const;

@@ -53,6 +53,27 @@ CREATE TABLE IF NOT EXISTS hazard_ticket (
   closed_at TEXT
 );
 
+CREATE TABLE IF NOT EXISTS device_outage (
+  id INTEGER PRIMARY KEY,
+  device_id TEXT,
+  reason TEXT,
+  expected_recovery_at TEXT,
+  status TEXT,
+  applicant TEXT,
+  applied_at TEXT,
+  confirmer TEXT,
+  confirmed_at TEXT,
+  device_status_before TEXT,
+  device_status_after TEXT,
+  check_result TEXT,
+  check_note TEXT,
+  checker TEXT,
+  checked_at TEXT,
+  recoverer TEXT,
+  recovered_at TEXT,
+  events TEXT
+);
+
 CREATE TABLE IF NOT EXISTS audit_log (
   id INTEGER PRIMARY KEY,
   actor TEXT,

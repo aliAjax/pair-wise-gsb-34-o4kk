@@ -1,0 +1,1 @@
+OutageCheckResult = ["NORMAL","ABNORMAL"]

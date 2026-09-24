@@ -4,6 +4,8 @@ import { routes } from "./router/routes";
 import { mockData } from "./mocks/seedData";
 import { StatusBadge } from "./components/common/StatusBadge";
 import { StatCard } from "./components/common/StatCard";
+import { DevicesPage } from "./pages/DevicesPage";
+import { TasksPage } from "./pages/TasksPage";
 import "./styles.css";
 
 function Page({ name }: { name: string }) {
@@ -20,7 +22,7 @@ function Page({ name }: { name: string }) {
     <section className="metrics">
       <StatCard label="核心模型" value={entities.length} />
       <StatCard label="本地记录" value={total} />
-      <StatCard label="共享枚举" value={3} />
+      <StatCard label="共享枚举" value={7} />
     </section>
     <section className="workbench">
       <div className="panel wide">
@@ -39,6 +41,12 @@ function Page({ name }: { name: string }) {
   </main>;
 }
 
+function ActivePage({ route, name }: { route: string; name: string }) {
+  if (route === "/devices") return <DevicesPage />;
+  if (route === "/tasks") return <TasksPage />;
+  return <Page name={name} />;
+}
+
 function App() {
   const [active, setActive] = useState<string>(routes[0]?.route ?? "/dashboard");
   const current = routes.find((route) => route.route === active) ?? routes[0];
@@ -47,7 +55,7 @@ function App() {
       <div className="brand">消防设施巡检维保平台</div>
       <nav>{routes.map((route) => <button key={route.route} className={active === route.route ? "active" : ""} onClick={() => setActive(route.route)}>{route.name}</button>)}</nav>
     </aside>
-    <Page name={current?.name ?? "工作台"} />
+    <ActivePage route={current?.route ?? "/dashboard"} name={current?.name ?? "工作台"} />
   </div>;
 }
 

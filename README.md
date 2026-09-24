@@ -57,6 +57,20 @@ backend/src/routes, controllers, services, models, repositories, middlewares, co
 - DeviceType: constants/DeviceType、types/DeviceType、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
 - InspectionStatus: constants/InspectionStatus、types/InspectionStatus、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
 - HazardSeverity: constants/HazardSeverity、types/HazardSeverity、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
+- DeviceStatus: constants/DeviceStatus、types/DeviceStatus、statusText、utils/formatters、OutageFlowPanel、DevicesPage/TasksPage、后端 constants/device_status、device_outage_service、inspection_task_service 均有引用。
+- OutageStatus: constants/OutageStatus、types/OutageStatus、statusText、utils/formatters、useOutageFlow、OutageFlowPanel、后端 constants/outage_status、device_outage_repository、device_outage_service 均有引用。
+- OutageCheckResult: constants/OutageCheckResult、types/OutageCheckResult、statusText、utils/formatters、OutageFlowPanel、后端 constants/outage_check_result、device_outage_service 均有引用。
+- RectifyStatus: constants/RectifyStatus、types/RectifyStatus、statusText、utils/formatters、useOutageFlow、后端 constants/rectify_status、device_outage_service 均有引用。
+
+## 设备停用/复启闭环
+
+- 报修申请：`POST /api/device-outage`，选设备、写原因和预计恢复日，生成 PENDING 停用单；同一设备有进行中停用单时返回 `DEVICE_BUSY`。
+- 主管确认：`POST /api/device-outage/{id}/confirm`（仅 admin/supervisor），设备置为 `OUT_OF_SERVICE`，未开始（PLANNED）任务中该设备的检查项退回排期（已关联隐患的记录保留待处理）。
+- 新建任务排除：`POST /api/inspection-task` 生成检查项时自动跳过 `OUT_OF_SERVICE` 设备，响应带 `skipped_device_ids`。
+- 复启检查：`POST /api/device-outage/{id}/check`，记录 NORMAL/ABNORMAL 与说明，可多次补录。
+- 复启：`POST /api/device-outage/{id}/recover`，仅当最近检查 NORMAL 且关联隐患全部 CLOSED 才恢复设备原状态，否则返回 `OUTAGE_CHECK_REQUIRED` / `HAZARD_OPEN`。
+- 取消：`POST /api/device-outage/{id}/cancel`，仅 PENDING 可取消。
+- 全程留痕：每个停用单的 `events` 记录处理人、时间和前后状态；设备页 `/devices` 与任务页 `/tasks` 共用 `OutageFlowPanel` 直接办理。
 
 ## 为什么会牵一发动全身
 
