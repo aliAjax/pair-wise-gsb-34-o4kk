@@ -1,162 +1,35 @@
+/**
+ * 本地种子数据（与后端 backend/src/bootstrap.py 保持一致）。
+ * 前端运行时以 /api 返回为准；此文件仅保留作离线对照，不请求任何第三方服务。
+ */
 export const mockData = {
-  "building": [
+  building: [
     {
-      "id": 1,
-      "name": "name 1",
-      "campus": "campus 1",
-      "floor_count": "floor count 1",
-      "fire_grade": "fire grade 1",
-      "manager_id": 1,
-      "address_code": "address code 1"
-    },
-    {
-      "id": 2,
-      "name": "name 2",
-      "campus": "campus 2",
-      "floor_count": "floor count 2",
-      "fire_grade": "fire grade 2",
-      "manager_id": 2,
-      "address_code": "address code 2"
-    },
-    {
-      "id": 3,
-      "name": "name 3",
-      "campus": "campus 3",
-      "floor_count": "floor count 3",
-      "fire_grade": "fire grade 3",
-      "manager_id": 3,
-      "address_code": "address code 3"
+      id: 1,
+      name: "1号研发楼",
+      campus: "梧桐园区",
+      floor_count: 8,
+      fire_grade: "一级",
+      manager_id: 31,
+      address_code: "310000-A01"
     }
   ],
-  "fireDevice": [
-    {
-      "id": 1,
-      "building_id": 1,
-      "device_code": "device code 1",
-      "device_type": "HYDRANT",
-      "floor": "floor 1",
-      "location_desc": "location desc 1",
-      "install_date": "2026-06-11T09:00:00Z",
-      "status": "IN_PROGRESS",
-      "next_maintenance_at": "2026-06-11T09:00:00Z"
-    },
-    {
-      "id": 2,
-      "building_id": 2,
-      "device_code": "device code 2",
-      "device_type": "SMOKE_DETECTOR",
-      "floor": "floor 2",
-      "location_desc": "location desc 2",
-      "install_date": "2026-06-12T09:00:00Z",
-      "status": "SUBMITTED",
-      "next_maintenance_at": "2026-06-12T09:00:00Z"
-    },
-    {
-      "id": 3,
-      "building_id": 3,
-      "device_code": "device code 3",
-      "device_type": "SPRINKLER",
-      "floor": "floor 3",
-      "location_desc": "location desc 3",
-      "install_date": "2026-06-13T09:00:00Z",
-      "status": "PLANNED",
-      "next_maintenance_at": "2026-06-13T09:00:00Z"
-    }
+  fireDevice: [
+    { id: 1, building_id: 1, building_name: "1号研发楼", device_code: "FH-0101", device_type: "HYDRANT", floor: "1F", location_desc: "大堂东侧消火栓", install_date: "2024-03-10", status: "NORMAL", next_maintenance_at: "2026-10-01" },
+    { id: 2, building_id: 1, building_name: "1号研发楼", device_code: "SD-0205", device_type: "SMOKE_DETECTOR", floor: "2F", location_desc: "205会议室烟感", install_date: "2024-03-10", status: "NORMAL", next_maintenance_at: "2026-10-01" },
+    { id: 3, building_id: 1, building_name: "1号研发楼", device_code: "SP-0308", device_type: "SPRINKLER", floor: "3F", location_desc: "308办公区喷淋头", install_date: "2024-05-20", status: "NORMAL", next_maintenance_at: "2026-09-30" },
+    { id: 4, building_id: 1, building_name: "1号研发楼", device_code: "EX-0B02", device_type: "EXIT_LIGHT", floor: "B1", location_desc: "地下车库出口指示灯", install_date: "2023-12-01", status: "NORMAL", next_maintenance_at: "2026-10-15" }
   ],
-  "inspectionTask": [
-    {
-      "id": 1,
-      "building_id": 1,
-      "inspector_id": 1,
-      "plan_date": "2026-06-11T09:00:00Z",
-      "task_type": "HYDRANT",
-      "status": "IN_PROGRESS",
-      "checklist_version": "checklist version 1",
-      "finished_at": "2026-06-11T09:00:00Z"
-    },
-    {
-      "id": 2,
-      "building_id": 2,
-      "inspector_id": 2,
-      "plan_date": "2026-06-12T09:00:00Z",
-      "task_type": "SMOKE_DETECTOR",
-      "status": "SUBMITTED",
-      "checklist_version": "checklist version 2",
-      "finished_at": "2026-06-12T09:00:00Z"
-    },
-    {
-      "id": 3,
-      "building_id": 3,
-      "inspector_id": 3,
-      "plan_date": "2026-06-13T09:00:00Z",
-      "task_type": "SPRINKLER",
-      "status": "PLANNED",
-      "checklist_version": "checklist version 3",
-      "finished_at": "2026-06-13T09:00:00Z"
-    }
+  inspectionTask: [
+    { id: 1, building_id: 1, inspector_id: 11, plan_date: "2026-09-28", task_type: "WEEKLY", status: "PLANNED", checklist_version: "v2026.1", finished_at: null, device_ids: [1, 2, 3, 4], return_reason: null },
+    { id: 2, building_id: 1, inspector_id: 11, plan_date: "2026-09-21", task_type: "WEEKLY", status: "IN_PROGRESS", checklist_version: "v2026.1", finished_at: null, device_ids: [2, 3], return_reason: null }
   ],
-  "inspectionResult": [
-    {
-      "id": 1,
-      "task_id": 1,
-      "device_id": 1,
-      "item_code": "item code 1",
-      "result_status": "IN_PROGRESS",
-      "measured_value": "measured value 1",
-      "photo_url": "/mock/photo_url-1.png",
-      "note": "note 1"
-    },
-    {
-      "id": 2,
-      "task_id": 2,
-      "device_id": 2,
-      "item_code": "item code 2",
-      "result_status": "SUBMITTED",
-      "measured_value": "measured value 2",
-      "photo_url": "/mock/photo_url-2.png",
-      "note": "note 2"
-    },
-    {
-      "id": 3,
-      "task_id": 3,
-      "device_id": 3,
-      "item_code": "item code 3",
-      "result_status": "PLANNED",
-      "measured_value": "measured value 3",
-      "photo_url": "/mock/photo_url-3.png",
-      "note": "note 3"
-    }
+  inspectionResult: [
+    { id: 1, task_id: 2, device_id: 3, item_code: "SP-PRESSURE", result_status: "ABNORMAL", measured_value: "0.18MPa", photo_url: "", note: "喷淋压力偏低，疑似管网渗漏" }
   ],
-  "hazardTicket": [
-    {
-      "id": 1,
-      "result_id": 1,
-      "severity": "severity 1",
-      "owner_id": 1,
-      "deadline": "deadline 1",
-      "rectify_status": "IN_PROGRESS",
-      "rectify_note": "rectify note 1",
-      "closed_at": "2026-06-11T09:00:00Z"
-    },
-    {
-      "id": 2,
-      "result_id": 2,
-      "severity": "severity 2",
-      "owner_id": 2,
-      "deadline": "deadline 2",
-      "rectify_status": "SUBMITTED",
-      "rectify_note": "rectify note 2",
-      "closed_at": "2026-06-12T09:00:00Z"
-    },
-    {
-      "id": 3,
-      "result_id": 3,
-      "severity": "severity 3",
-      "owner_id": 3,
-      "deadline": "deadline 3",
-      "rectify_status": "PLANNED",
-      "rectify_note": "rectify note 3",
-      "closed_at": "2026-06-13T09:00:00Z"
-    }
-  ]
-} as const;
+  hazardTicket: [
+    { id: 1, result_id: 1, device_id: 3, severity: "HIGH", owner_id: 21, deadline: "2026-09-30", rectify_status: "RECTIFYING", rectify_note: "已报维保商，待更换密封件", closed_at: null },
+    { id: 2, result_id: 1, device_id: 1, severity: "LOW", owner_id: 21, deadline: "2026-08-30", rectify_status: "CLOSED", rectify_note: "消火栓箱门铰链已上油", closed_at: "2026-08-26 10:00:00" }
+  ],
+  deviceStatusOrder: []
+};

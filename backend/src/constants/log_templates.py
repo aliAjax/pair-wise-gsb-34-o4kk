@@ -9,13 +9,21 @@ LOG_TEMPLATES = {
     "FireDevice.create",
     "FireDevice.update",
     "FireDevice.status",
-    "FireDevice.export"
+    "FireDevice.export",
+    "FireDevice.disableApply",
+    "FireDevice.disableConfirm",
+    "FireDevice.disableReject",
+    "FireDevice.reactivationCheck",
+    "FireDevice.reactivate"
   ],
   "InspectionTask": [
     "InspectionTask.create",
     "InspectionTask.update",
     "InspectionTask.status",
-    "InspectionTask.export"
+    "InspectionTask.export",
+    "InspectionTask.excludeDisabledDevice",
+    "InspectionTask.returnToSchedule",
+    "InspectionTask.reschedule"
   ],
   "InspectionResult": [
     "InspectionResult.create",
@@ -28,5 +36,13 @@ LOG_TEMPLATES = {
     "HazardTicket.update",
     "HazardTicket.status",
     "HazardTicket.export"
+  ],
+  "DeviceStatusOrder": [
+    "DeviceStatusOrder.apply",
+    "DeviceStatusOrder.confirm",
+    "DeviceStatusOrder.reject",
+    "DeviceStatusOrder.submitCheck",
+    "DeviceStatusOrder.reactivate",
+    "DeviceStatusOrder.list"
   ]
 }

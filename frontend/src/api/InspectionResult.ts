@@ -1,21 +1,13 @@
-import { mockData } from "../mocks/seedData";
 import type { InspectionResult } from "../types/InspectionResult";
+import { request } from "./request";
 
-const endpoint = "/api/inspection-result";
-
-export async function listInspectionResult(): Promise<InspectionResult[]> {
-  if (typeof fetch !== "undefined" && endpoint.startsWith("/api") && true) {
-    try {
-      const res = await fetch(endpoint);
-      if (res.ok) return await res.json();
-    } catch {
-      // Local mock fallback keeps the UI available during offline review.
-    }
-  }
-  return [...(mockData.inspectionResult as unknown as InspectionResult[])];
-}
-
-export async function saveInspectionResult(payload: InspectionResult) {
-  console.info("save InspectionResult", payload);
-  return payload;
+export async function listInspectionResult(params?: {
+  task_id?: number;
+  device_id?: number;
+}): Promise<InspectionResult[]> {
+  const search = new URLSearchParams();
+  if (params?.task_id) search.set("task_id", String(params.task_id));
+  if (params?.device_id) search.set("device_id", String(params.device_id));
+  const query = search.toString() ? `?${search.toString()}` : "";
+  return request<InspectionResult[]>(`/inspection-result${query}`);
 }

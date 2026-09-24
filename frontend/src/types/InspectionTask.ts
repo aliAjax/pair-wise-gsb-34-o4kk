@@ -4,7 +4,10 @@ export interface InspectionTask {
   inspector_id: number;
   plan_date: string;
   task_type: string;
+  /** PLANNED / IN_PROGRESS / SUBMITTED / REVIEWED / OVERDUE / RETURNED */
   status: string;
   checklist_version: string;
-  finished_at: string;
+  finished_at: string | null;
+  device_ids: number[];
+  return_reason: string | null;
 }
